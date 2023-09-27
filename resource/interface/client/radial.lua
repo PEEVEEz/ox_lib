@@ -191,7 +191,6 @@ function lib.clearRadialItems()
     if isOpen then
         refreshRadial()
     end
-    
 end
 
 RegisterNUICallback('radialClick', function(index, cb)
@@ -296,9 +295,9 @@ function lib.disableRadial(state)
 end
 
 lib.addKeybind({
-    name = 'ox_lib-radial',
-    description = 'Open radial menu',
-    defaultKey = 'z',
+    name = 'ox_lib-radiald',
+    description = 'Avaa radialmenu',
+    defaultKey = 'g',
     onPressed = function()
         if isDisabled then return end
 
@@ -307,6 +306,7 @@ lib.addKeybind({
         end
 
         if #menuItems == 0 or IsNuiFocused() or IsPauseMenuActive() then return end
+        TriggerEvent('ox_lib:radialOpen')
 
         isOpen = true
 
@@ -329,7 +329,7 @@ lib.addKeybind({
             Wait(0)
         end
     end,
-    -- onReleased = lib.hideRadial,
+    onReleased = lib.hideRadial,
 })
 
 AddEventHandler('onClientResourceStop', function(resource)
